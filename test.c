@@ -19,7 +19,7 @@ int main()
 {
     int year =2022;
     printf("%s-%d",month[3],year);leapyear_check(2022) ? printf("Leap"):printf("No leap");
-    printf("\nSun\tMon\tTues\tWed\tThurs\tFri\tSat\n"); //space between is 4
+    printf("\n Sun  Mon  Tues  Wed  Thurs  Fri  Sat\n"); //space between is 4
     
   // leapyear_check(2022) ? printf("Leap"):printf("No leap");
    
@@ -29,7 +29,7 @@ int main()
    int day;
    for(i=0;i<=starting_days-1;i++)
    {
-       printf("\t");
+       printf("     ");
    }
   
    //
@@ -37,7 +37,7 @@ int main()
    
    for(day=1;day<=30;day++)
    {
-       printf("%2d",day);
+       printf("%5d",day);
        
        
        if(++i>6)
