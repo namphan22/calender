@@ -21,6 +21,7 @@ int main()
     setup_color(12);
     printf("Hello Word");
     leapyear_check(1998) ?printf("Leap Year"):printf("Not a leap year");
+    // test 
    
 
 
