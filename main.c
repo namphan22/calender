@@ -8,6 +8,7 @@
 
 
 const char* month[]={"January","February","March","April","May","June","July","August","September","October","October","November","December"};
+const char* week[]={"Sun","Mon","Tues","Wed","Thurs","Fri","Sat"};
 void display_calender(int year_of_users, int month_of_users);
 int get_1st_weekdays(int day, int month, int year);
 void gotoxy(int x,int y);
@@ -41,41 +42,61 @@ void check_calender(int year_of_users, int month_of_users)
 */
 void display_calender(int year_of_users,int month_of_users)
 {
-    setup_color(5);
+    int pos;
+    uint8_t i;
+    setup_color(4);
     gotoxy(55,6);
-    printf("%s-%d",month[month_of_users-1],year_of_users);leapyear_check(year_of_users) ? printf("Leap"):printf("No leap");
+    printf("%s-%d",month[month_of_users-1],year_of_users);printf(" ");leapyear_check(year_of_users) ? printf("Leap"):printf("No leap");
     setup_color(1);
     gotoxy(25,7);
-    printf("Sun        Mon        Tues        Wed        Thurs        Fri        Sat\n"); //space between is 4
+  //  printf("Sun        Mon        Tues        Wed        Thurs        Fri        Sat\n"); //space between is 4
     
   // leapyear_check(2022) ? printf("Leap"):printf("No leap");
    
-   gotoxy(25,8);
+ //  gotoxy(8);
+  for(i=0,pos=30;i<7;i++,pos+=10)
+  {
+      setup_color(5);
+      gotoxy(pos,8);printf("%s",week[i]);
+  }
+  
    int starting_days= get_1st_weekdays(1,month_of_users,year_of_users);
-   uint8_t i;
+   
    int day;
-   for(i=0;i<=starting_days-2;i++)
+   for(i=0,pos=30;i<=starting_days;i++,pos+=10)
    {
-    printf("           ");
+       setup_color(15);
+       gotoxy(pos,9);
    }
   
-   //
+ 
+    uint8_t j=10;
    
    
    for(day=1;day<=30;day++)
    {
-       printf("%8d",day);
+       
+     //  printf("%d",day);
+       printf("         ");
+       printf("%d",day);
+
        
        
-       if(++i>6)
+       if(++i>8)
        {
+           gotoxy(30,j);
            
-           printf("\n");
+          // printf("\n");
            i=0;
+           ++j;
        }
+       
    }
+   
+   
     
 }
+
 
 
 
