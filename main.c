@@ -22,8 +22,17 @@ int main()
 
     draw();
     display_calender(2022,4);
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    
     setup_color(5);
+    while(1)
+    {
+        gotoxy(20,20);printf("Use UP and DOWN arrow in the your keyboard");
+        gotoxy(20,22);printf("Press ESC to exit program");
+        
+
+    
+    }
+
     
     return 0;
 
@@ -45,15 +54,11 @@ void display_calender(int year_of_users,int month_of_users)
     int pos;
     uint8_t i;
     setup_color(4);
-    gotoxy(55,6);
+    gotoxy(30,6);
     printf("%s-%d",month[month_of_users-1],year_of_users);printf(" ");leapyear_check(year_of_users) ? printf("Leap"):printf("No leap");
     setup_color(1);
     gotoxy(25,7);
-  //  printf("Sun        Mon        Tues        Wed        Thurs        Fri        Sat\n"); //space between is 4
-    
-  // leapyear_check(2022) ? printf("Leap"):printf("No leap");
-   
- //  gotoxy(8);
+  
   for(i=0,pos=30;i<7;i++,pos+=10)
   {
       setup_color(5);
@@ -68,33 +73,45 @@ void display_calender(int year_of_users,int month_of_users)
        setup_color(15);
        gotoxy(pos,9);
    }
+    i =--i;
+ 
   
  
-    uint8_t j=10;
+    uint8_t j=9;
    
    
-   for(day=1;day<=30;day++)
+   for(day=1,pos-10;day<=30,pos<=100;day++,pos+=10)
    {
        
      //  printf("%d",day);
-       printf("         ");
+       
        printf("%d",day);
+       gotoxy(pos,j);
+
 
        
        
-       if(++i>8)
+       if(++i>6)
        {
-           gotoxy(30,j);
+           ++j;
+           gotoxy(pos-70,j);
+           pos =30;
            
           // printf("\n");
            i=0;
-           ++j;
+           
        }
+       if(day==30) break;
+       
        
    }
    
    
+   
+   
     
+
+
 }
 
 
