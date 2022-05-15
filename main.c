@@ -9,7 +9,7 @@
 
 const char* month[]={"January","February","March","April","May","June","July","August","September","October","October","November","December"};
 const char* week[]={"Sun","Mon","Tues","Wed","Thurs","Fri","Sat"};
-void display_calender(int year_of_users, int month_of_users);
+void display_calender(int year_from_users, int month_from_users);
 int get_1st_weekdays(int day, int month, int year);
 void gotoxy(int x,int y);
 void setup_color(int value_color);
@@ -18,21 +18,67 @@ void draw(void);
 
 int main()
 {
-
-
+    int month_from_users=2;
+    int year_from_user=2022;
+   
+    char get_key;
+    int ascci_value;
     draw();
-    display_calender(2022,4);
+    display_calender(year_from_user,month_from_users);
     
     setup_color(5);
-    while(1)
-    {
+   while(1)
+   {
         gotoxy(20,20);printf("Use UP and DOWN arrow in the your keyboard");
         gotoxy(20,22);printf("Press ESC to exit program");
         
+      
+        gotoxy(20,24);
+        get_key =getch();
+        ascci_value = get_key;
+        switch (ascci_value)
+        {
+        case 72: // up arrow in  keyboard
+           if(month_from_users ==1)
+           {
+               
+               year_from_user--; 
+               month_from_users =12;
+           }
+           else
+           {
+               month_from_users--;
+           }
+           display_calender(year_from_user,month_from_users);
+            
+            break;
+        case 80:// down arrow in keyboard
+        if(month_from_users ==12)
+        {
+            year_from_user++;
+            month_from_users=1;
+        }
+        else
+        {
+            month_from_users++;
+
+        }
+        display_calender(year_from_user,month_from_users);
+        break;
+
+        
+        default:
+            break;
+        }
+        if(ascci_value ==27)
+        {
+            break;
+        }
+          
 
     
     }
-
+    printf("\n\n\n");
     
     return 0;
 
@@ -49,13 +95,13 @@ void check_calender(int year_of_users, int month_of_users)
 
 }
 */
-void display_calender(int year_of_users,int month_of_users)
+void display_calender(int year_from_users,int month_from_users)
 {
     int pos;
     uint8_t i;
     setup_color(4);
     gotoxy(30,6);
-    printf("%s-%d",month[month_of_users-1],year_of_users);printf(" ");leapyear_check(year_of_users) ? printf("Leap"):printf("No leap");
+    printf("%s-%d",month[month_from_users-1],year_from_users);printf(" ");leapyear_check(year_from_users) ? printf("Leap"):printf("No leap");
     setup_color(1);
     gotoxy(25,7);
   
@@ -65,7 +111,7 @@ void display_calender(int year_of_users,int month_of_users)
       gotoxy(pos,8);printf("%s",week[i]);
   }
   
-   int starting_days= get_1st_weekdays(1,month_of_users,year_of_users);
+   int starting_days= get_1st_weekdays(1,month_from_users,year_from_users);
    
    int day;
    for(i=0,pos=30;i<=starting_days;i++,pos+=10)
@@ -142,9 +188,9 @@ void setup_color(int value_color)
      }
     
 }
-bool leapyear_check(int year_of_users)
+bool leapyear_check(int year_from_users)
 {
-	return ((year_of_users%4==0)&&(year_of_users%100 !=0)||(year_of_users)%400==0);
+	return ((year_from_users%4==0)&&(year_from_users%100 !=0)||(year_from_users)%400==0);
 
 }
 void draw(void)
